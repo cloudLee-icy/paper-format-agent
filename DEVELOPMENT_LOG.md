@@ -2,6 +2,14 @@
 
 ## 2026-05-28
 
+### README Bilingual Update
+
+- Rewrote `README.md` as a Chinese/English bilingual project overview.
+- Added the current CLI effect, detected structure example, generated output paths, and report summary.
+- Added a reusable README maintenance prompt to `AGENTS.md` so future agents update the bilingual README when user-visible behavior changes.
+- Verified with `compileall`, example DOCX generation, CLI `inspect`, and CLI `format`.
+- `pytest` was not run because the current environment does not have `pytest` installed.
+
 ### Initial MVP
 
 - Created the `paper-format-agent` Python project.
@@ -36,4 +44,3 @@ Future agents should append entries in this format:
 - How it was verified.
 - Any known limitations or follow-up tasks.
 ```
-

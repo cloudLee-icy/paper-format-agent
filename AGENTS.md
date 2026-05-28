@@ -40,3 +40,18 @@ Expected result:
 - Add tests for detection and rule parsing before expanding heuristics.
 - Do not introduce heavyweight dependencies unless they unlock a concrete roadmap item.
 
+## README Maintenance Prompt
+
+When a change affects user-visible behavior, CLI commands, templates, generated outputs, or the smoke-test result, reuse this maintenance prompt before handoff:
+
+```text
+Update README.md in both Chinese and English. Keep the Chinese section first when practical. Include:
+1. What the tool currently does.
+2. How to install and run it.
+3. The current observable effect, including inspect output or report summary when behavior changes.
+4. Links or paths to generated example outputs if they exist.
+5. Any current limitations that a GitHub reader should know.
+Keep the formatter description deterministic: AI may classify or review, but code writes the final DOCX.
+```
+
+If the current effect changes, update the README's "当前效果 / Current Effect" section during the same work session.

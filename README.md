@@ -1,8 +1,8 @@
 # Paper Format Agent
 
-Turn messy academic DOCX files into journal or thesis formatted documents.
+把杂乱的学术 DOCX 稿件转换成期刊或论文模板格式。
 
-Paper Format Agent is a template-driven formatter for academic manuscripts. It takes an input Word document, applies a thesis or journal style template, and writes both a formatted DOCX and a human-readable report.
+Paper Format Agent is a template-driven formatter that turns messy academic DOCX manuscripts into journal or thesis formatted documents.
 
 ```text
 messy.docx + template.json
@@ -11,31 +11,53 @@ messy.docx + template.json
 formatted.docx + report.md
 ```
 
-## Status
+## 当前状态 / Status
 
-This is an early MVP. It is useful for validating the workflow:
+这是一个早期 MVP，已经可以验证核心工作流：
 
-- DOCX in, DOCX out
+- DOCX 输入、DOCX 输出
+- JSON 格式模板
+- 基于规则的段落结构识别
+- 标题、摘要、关键词、正文、图表题注、参考文献格式化
+- Markdown 格式化报告
+
+This is an early MVP. It currently supports:
+
+- DOCX input and output
 - JSON formatting templates
 - Rule-based paragraph role detection
-- Heading, body, abstract, keyword, caption, and reference formatting
-- Markdown format report
+- Formatting for title, abstract, keywords, body text, captions, and references
+- A Markdown report that explains detected structure and warnings
 
-It does not yet fully validate citation styles, formulas, table layout, or school-specific thesis rules.
+暂不支持完整引用格式校验、公式排版、表格布局重写或学校级论文规范全量检查。
 
-## Install
+It does not yet fully validate citation styles, formulas, table layouts, or school-specific thesis requirements.
+
+## 安装 / Install
 
 ```bash
 pip install -e .
 ```
 
-## Usage
+## 使用 / Usage
 
-Inspect a document:
+生成示例文档：
+
+Create the example manuscript:
+
+```bash
+python examples/create_example_docx.py
+```
+
+检查文档结构：
+
+Inspect detected paragraph roles:
 
 ```bash
 paperfmt inspect --input examples/messy_paper.docx
 ```
+
+格式化文档：
 
 Format a document:
 
@@ -47,7 +69,59 @@ paperfmt format \
   --report examples/output/report.md
 ```
 
-## Template Example
+## 当前效果 / Current Effect
+
+示例文档的 `inspect` 输出可以识别标题、摘要、关键词、章节标题、正文、图题和参考文献：
+
+The current `inspect` output for the example document detects title, abstract, keywords, headings, body text, figure caption, and references:
+
+```text
+#   Role                Text
+0   title               面向学术写作的文档格式化方法研究
+1   abstract            摘要：本文讨论一种将不规范论文文档转换为目标模板格式的方法。
+2   keywords            关键词：论文格式化；Word；模板；学术写作
+3   heading_1           1 引言
+4   body                作者在投稿或提交毕业论文前，通常需要花费大量时间处理格式问题。
+5   heading_2           1.1 研究背景
+6   body                不同期刊和学校对字体、行距、页边距、标题层级和参考文献有不同要求。
+7   figure_caption      图 1 文档格式化流程
+8   heading_1           2 方法
+9   body                本文采用结构识别和确定性格式套用相结合的方式。
+10  references_heading  参考文献
+11  reference           [1] Zhang S. Academic document formatting workflow. 2026.
+```
+
+格式化命令会生成：
+
+The formatting command generates:
+
+- `examples/output/formatted.docx`
+- `examples/output/report.md`
+
+当前报告摘要：
+
+Current report summary:
+
+```text
+Paragraphs scanned: 12
+Paragraphs styled: 12
+
+Detected Structure:
+- abstract: 1
+- body: 3
+- figure_caption: 1
+- heading_1: 2
+- heading_2: 1
+- keywords: 1
+- reference: 1
+- references_heading: 1
+- title: 1
+
+Warnings:
+- No basic structural warnings.
+```
+
+## 模板示例 / Template Example
 
 ```json
 {
@@ -77,18 +151,23 @@ paperfmt format \
 }
 ```
 
-## Why This Project
+## 为什么做这个项目 / Why This Project
 
-Most academic formatting tools either require manual Word work or depend on rigid templates. This project aims to make formatting reproducible:
+大多数学术格式处理仍然依赖手动 Word 操作，或者依赖很难审计的固定模板。本项目希望让格式化过程可复现、可解释：
 
-- AI can help identify structure.
+Most academic formatting workflows still depend on manual Word editing or opaque rigid templates. This project aims to make formatting reproducible and auditable:
+
+- AI 可以辅助识别结构，但不直接写最终 DOCX。
+- AI may help identify structure, but it should not directly write the final DOCX.
+- 确定性代码负责套用格式。
 - Deterministic code applies formatting.
-- Reports make changes auditable.
+- 报告记录识别结果和基础告警。
+- Reports make detected structure and warnings visible.
 
-## Roadmap
+## 路线图 / Roadmap
 
 See [docs/roadmap.md](docs/roadmap.md).
 
-## License
+## 许可证 / License
 
 MIT
