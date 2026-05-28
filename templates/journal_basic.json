@@ -1,0 +1,94 @@
+{
+  "name": "Basic Journal Manuscript Template",
+  "page": {
+    "margin_top_cm": 2.54,
+    "margin_bottom_cm": 2.54,
+    "margin_left_cm": 2.54,
+    "margin_right_cm": 2.54
+  },
+  "styles": {
+    "title": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimHei",
+      "size_pt": 16,
+      "bold": true,
+      "alignment": "center",
+      "space_after_pt": 10
+    },
+    "abstract_heading": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimHei",
+      "size_pt": 12,
+      "bold": true
+    },
+    "abstract": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimSun",
+      "size_pt": 10.5,
+      "line_spacing": 1.15
+    },
+    "keywords": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimSun",
+      "size_pt": 10.5,
+      "line_spacing": 1.15
+    },
+    "heading_1": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimHei",
+      "size_pt": 12,
+      "bold": true,
+      "space_before_pt": 10,
+      "space_after_pt": 4
+    },
+    "heading_2": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimHei",
+      "size_pt": 11,
+      "bold": true,
+      "space_before_pt": 8,
+      "space_after_pt": 4
+    },
+    "heading_3": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimHei",
+      "size_pt": 10.5,
+      "bold": true,
+      "space_before_pt": 6,
+      "space_after_pt": 2
+    },
+    "body": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimSun",
+      "size_pt": 10.5,
+      "line_spacing": 1.15
+    },
+    "figure_caption": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimSun",
+      "size_pt": 9,
+      "alignment": "center"
+    },
+    "table_caption": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimSun",
+      "size_pt": 9,
+      "alignment": "center"
+    },
+    "references_heading": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimHei",
+      "size_pt": 12,
+      "bold": true,
+      "space_before_pt": 10,
+      "space_after_pt": 4
+    },
+    "reference": {
+      "font": "Times New Roman",
+      "east_asia_font": "SimSun",
+      "size_pt": 9,
+      "line_spacing": 1.0
+    }
+  }
+}
+
