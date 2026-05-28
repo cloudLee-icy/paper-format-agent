@@ -2,6 +2,14 @@
 
 ## 2026-05-28
 
+### Built-In UESTC Graduate Template
+
+- Added `templates/uestc_graduate_thesis.json` as a curated built-in template based on the provided UESTC graduate thesis writing specification for Chinese students.
+- Extended paragraph style rules with `line_spacing_pt` so templates can express fixed line spacing such as 20 pt.
+- Updated `README.md` to list the built-in UESTC template, usage command, and current limitations.
+- Verified template loading and formatting with the CLI smoke test.
+- Kept this as a built-in curated template; generic DOCX/PDF template extraction remains future work.
+
 ### README Bilingual Update
 
 - Rewrote `README.md` as a Chinese/English bilingual project overview.

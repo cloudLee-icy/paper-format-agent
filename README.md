@@ -17,6 +17,7 @@ formatted.docx + report.md
 
 - DOCX 输入、DOCX 输出
 - JSON 格式模板
+- 内置基础论文模板、期刊模板和电子科技大学研究生学位论文模板
 - 基于规则的段落结构识别
 - 标题、摘要、关键词、正文、图表题注、参考文献格式化
 - Markdown 格式化报告
@@ -25,13 +26,14 @@ This is an early MVP. It currently supports:
 
 - DOCX input and output
 - JSON formatting templates
+- Built-in basic thesis, journal, and UESTC graduate thesis templates
 - Rule-based paragraph role detection
 - Formatting for title, abstract, keywords, body text, captions, and references
 - A Markdown report that explains detected structure and warnings
 
-暂不支持完整引用格式校验、公式排版、表格布局重写或学校级论文规范全量检查。
+暂不支持完整引用格式校验、公式排版、表格布局重写或学校级论文规范全量检查。也暂不支持从规范 DOCX/PDF 自动通用提取模板；电子科大模板目前是手工整理的内置 JSON。
 
-It does not yet fully validate citation styles, formulas, table layouts, or school-specific thesis requirements.
+It does not yet fully validate citation styles, formulas, table layouts, or complete school-specific thesis requirements. It also does not yet support generic template extraction from specification DOCX/PDF files; the UESTC template is a curated built-in JSON file.
 
 ## 安装 / Install
 
@@ -67,6 +69,18 @@ paperfmt format \
   --template templates/thesis_basic.json \
   --output examples/output/formatted.docx \
   --report examples/output/report.md
+```
+
+使用内置电子科技大学研究生学位论文模板：
+
+Use the built-in UESTC graduate thesis template:
+
+```bash
+paperfmt format \
+  --input examples/messy_paper.docx \
+  --template templates/uestc_graduate_thesis.json \
+  --output examples/output/uestc_formatted.docx \
+  --report examples/output/uestc_report.md
 ```
 
 ## 当前效果 / Current Effect
@@ -122,6 +136,18 @@ Warnings:
 ```
 
 ## 模板示例 / Template Example
+
+当前内置模板：
+
+Built-in templates:
+
+- `templates/thesis_basic.json`
+- `templates/journal_basic.json`
+- `templates/uestc_graduate_thesis.json`
+
+`uestc_graduate_thesis.json` 是基于用户提供的《电子科技大学研究生学位论文撰写规范- 适用于中国学生》整理的内置模板。它不是通用自动提取结果，当前主要覆盖页面边距、标题、正文、图题、表题和参考文献段落格式。
+
+`uestc_graduate_thesis.json` is curated from the provided UESTC graduate thesis writing specification for Chinese students. It is not a generic automatic extraction result. It currently covers page margins and paragraph styles for headings, body text, captions, and references.
 
 ```json
 {

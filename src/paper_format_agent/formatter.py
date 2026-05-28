@@ -52,6 +52,8 @@ def apply_paragraph_rule(paragraph, rule: ParagraphStyleRule) -> None:
         fmt.first_line_indent = Cm(rule.first_line_indent_cm)
     if rule.left_indent_cm is not None:
         fmt.left_indent = Cm(rule.left_indent_cm)
+    if rule.line_spacing_pt is not None:
+        fmt.line_spacing = Pt(rule.line_spacing_pt)
     if rule.line_spacing is not None:
         fmt.line_spacing = rule.line_spacing
     if rule.space_before_pt is not None:
@@ -79,4 +81,3 @@ def add_basic_warnings(stats: FormatStats) -> None:
         stats.warnings.append("No keywords paragraph was detected.")
     if stats.role_counts.get(ParagraphRole.REFERENCES_HEADING, 0) == 0:
         stats.warnings.append("No references heading was detected.")
-

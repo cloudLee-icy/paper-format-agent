@@ -16,6 +16,8 @@ Implemented:
 - DOCX formatting engine.
 - Markdown report generation.
 - Basic thesis and journal templates.
+- Built-in UESTC graduate thesis template curated from a provided specification DOCX.
+- Fixed-point line spacing support through `line_spacing_pt`.
 - Example document generator.
 - One basic structure detection test file.
 - Chinese/English bilingual README with current CLI effect and report summary.
@@ -34,6 +36,7 @@ Implemented:
 - `src/paper_format_agent/report.py`: Markdown report.
 - `templates/thesis_basic.json`: thesis template.
 - `templates/journal_basic.json`: journal template.
+- `templates/uestc_graduate_thesis.json`: UESTC graduate thesis template curated from the provided specification DOCX.
 - `examples/create_example_docx.py`: sample document generator.
 
 ## Last Verified Command
@@ -44,6 +47,7 @@ $env:PYTHONPATH='src'
 & 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' examples\create_example_docx.py
 & 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m paper_format_agent.cli inspect --input examples\messy_paper.docx
 & 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m paper_format_agent.cli format --input examples\messy_paper.docx --template templates\thesis_basic.json --output examples\output\formatted.docx --report examples\output\report.md
+& 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m paper_format_agent.cli format --input examples\messy_paper.docx --template templates\uestc_graduate_thesis.json --output examples\output\uestc_formatted.docx --report examples\output\uestc_report.md
 ```
 
 Verified output:
@@ -51,9 +55,11 @@ Verified output:
 - `inspect` detects title, abstract, keywords, headings, body, figure caption, references heading, and reference.
 - `examples/output/formatted.docx`
 - `examples/output/report.md`
+- `examples/output/uestc_formatted.docx`
+- `examples/output/uestc_report.md`
 
 Note: `pytest` is listed as a dev dependency but is not installed in the current runtime, so `python -m pytest -q` fails with `No module named pytest`.
 
 ## Next Recommended Task
 
-Add a `validate-template` command that checks whether a JSON template contains all required roles and prints actionable errors.
+Add a `validate-template` command that checks whether a JSON template contains all required roles and prints actionable errors. After that, consider an `extract-template` prototype for structured specification DOCX files like the UESTC graduate thesis specification.
