@@ -16,16 +16,27 @@ def load_document(path: Path) -> DocumentObject:
 def detect_structure(document: DocumentObject) -> list[ParagraphInfo]:
     paragraphs: list[ParagraphInfo] = []
     in_references = False
+    in_contents = False
     first_content_seen = False
 
     for index, paragraph in enumerate(document.paragraphs):
         text = paragraph.text
+        stripped = text.strip()
         style_name = paragraph.style.name if paragraph.style is not None else None
-        role = detect_role(text, style_name, in_references=in_references)
+        role = detect_role(
+            text,
+            style_name,
+            in_references=in_references,
+            in_contents=in_contents,
+        )
         if not first_content_seen and role == ParagraphRole.BODY and 0 < len(text.strip()) <= 100:
             role = ParagraphRole.TITLE
         if role != ParagraphRole.EMPTY:
             first_content_seen = True
+        if stripped in {"目录", "Contents"}:
+            in_contents = True
+        elif role == ParagraphRole.EMPTY:
+            in_contents = False
         if role == ParagraphRole.REFERENCES_HEADING:
             in_references = True
         elif role in {ParagraphRole.HEADING_1, ParagraphRole.HEADING_2, ParagraphRole.HEADING_3}:

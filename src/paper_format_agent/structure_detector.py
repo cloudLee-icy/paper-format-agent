@@ -25,13 +25,20 @@ UNNUMBERED_HEADING_PATTERNS = (
 )
 
 
-def detect_role(text: str, style_name: str | None = None, in_references: bool = False) -> ParagraphRole:
+def detect_role(
+    text: str,
+    style_name: str | None = None,
+    in_references: bool = False,
+    in_contents: bool = False,
+) -> ParagraphRole:
     stripped = text.strip()
     lower = stripped.lower()
     style_lower = (style_name or "").lower()
 
     if not stripped:
         return ParagraphRole.EMPTY
+    if in_contents:
+        return ParagraphRole.TOC_ENTRY
     if lower in ABSTRACT_PATTERNS:
         return ParagraphRole.ABSTRACT_HEADING
     if lower.startswith(ABSTRACT_PATTERNS):

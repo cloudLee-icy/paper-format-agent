@@ -157,9 +157,13 @@ Warnings:
 - No basic structural warnings.
 ```
 
-完整结构示例当前可以覆盖封面信息、声明、摘要、英文摘要、目录、图目录、表目录、主要符号表、缩略词表、正文、图题、表题、公式文本、结论、致谢、参考文献、附录和攻读学位期间成果。使用 Word 导出的检查结果为 6 页；LibreOffice 渲染当前不可用，因为本机 `D:\Software\LibreOffice\program\bootstrap.ini` 已损坏。
+完整结构示例当前可以覆盖封面信息、声明、摘要、英文摘要、目录、图目录、表目录、主要符号表、缩略词表、正文、图题、表题、公式文本、结论、致谢、参考文献、附录和攻读学位期间成果。启用关键标题前分页后，使用 Word 检查的结果为 19 页；LibreOffice 渲染当前不可用，因为本机 `D:\Software\LibreOffice\program\bootstrap.ini` 已损坏。
 
-The fuller thesis demo covers cover metadata, statements, Chinese and English abstracts, contents, figure/table lists, symbols, acronyms, chapters, captions, formula text, conclusion, acknowledgements, references, appendix, and achievements. Microsoft Word exported the formatted demo as a 6-page PDF. LibreOffice rendering is currently unavailable because the local `D:\Software\LibreOffice\program\bootstrap.ini` is damaged.
+The fuller thesis demo covers cover metadata, statements, Chinese and English abstracts, contents, figure/table lists, symbols, acronyms, chapters, captions, formula text, conclusion, acknowledgements, references, appendix, and achievements. After enabling page breaks before key headings, Microsoft Word reports the formatted demo as 19 pages. LibreOffice rendering is currently unavailable because the local `D:\Software\LibreOffice\program\bootstrap.ini` is damaged.
+
+当前仍未实现完整 Word 分节体系，例如不同部分的页眉、罗马数字页码和阿拉伯数字页码切换。`page_break_before` 只是分页控制，不等同于 section break。
+
+Full Word section handling is still not implemented, including different headers and Roman/Arabic page-numbering zones. `page_break_before` controls page breaks only; it is not the same as section breaks.
 
 ## 模板示例 / Template Example
 
@@ -215,6 +219,10 @@ Most academic formatting workflows still depend on manual Word editing or opaque
 - Deterministic code creates or updates named Word styles, then applies those styles to matching paragraphs.
 - 输出文档保留人工修改余地：用户可以在 Word 的样式面板里修改 `正文`、`一级标题`、`参考文献条目` 等样式。
 - The output remains editable: users can adjust content-matched styles such as `正文`, `一级标题`, and `参考文献条目` in Word after generation.
+- 生成样式会写入 Word 快速样式库，便于在样式面板中定位和人工调整。
+- Generated styles are marked as Word quick styles so they are easier to find and adjust in Word.
+- 模板可以设置 `page_break_before`，当前电子科大模板会让摘要标题、一级标题、参考文献标题等关键部分从新页开始。
+- Templates can set `page_break_before`; the current UESTC template starts key sections such as abstracts, level-1 headings, and references on new pages.
 - 报告记录识别结果和基础告警。
 - Reports make detected structure and warnings visible.
 

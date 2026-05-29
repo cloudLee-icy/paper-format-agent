@@ -2,6 +2,15 @@
 
 ## 2026-05-29
 
+### Quick Styles And Page Breaks
+
+- Marked generated Word styles as quick styles, visible and easier to locate in Word's style UI.
+- Added template support for `page_break_before`, `keep_with_next`, and `keep_together`.
+- Updated the UESTC template so abstract headings, level-1 headings, and references headings start on new pages.
+- Added `toc_entry` detection so manually written contents entries do not become level-1 headings or trigger page breaks.
+- Re-generated `examples/output/full_thesis_uestc_formatted.docx`; Microsoft Word reports 19 pages after page-break rules.
+- Full Word section handling is still future work, including distinct headers and Roman/Arabic page-numbering zones.
+
 ### Full Thesis Demo And Structure Check
 
 - Added `examples/create_full_thesis_docx.py` to generate an original full-structure thesis demo.

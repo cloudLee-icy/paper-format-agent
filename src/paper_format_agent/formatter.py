@@ -25,6 +25,7 @@ DEFAULT_WORD_STYLE_NAMES = {
     ParagraphRole.HEADING_1: "一级标题",
     ParagraphRole.HEADING_2: "二级标题",
     ParagraphRole.HEADING_3: "三级标题",
+    ParagraphRole.TOC_ENTRY: "目录条目",
     ParagraphRole.FIGURE_CAPTION: "图题",
     ParagraphRole.TABLE_CAPTION: "表题",
     ParagraphRole.REFERENCES_HEADING: "参考文献标题",
@@ -100,6 +101,12 @@ def apply_rule_to_word_style(style, rule: ParagraphStyleRule) -> None:
         fmt.space_before = Pt(rule.space_before_pt)
     if rule.space_after_pt is not None:
         fmt.space_after = Pt(rule.space_after_pt)
+    if rule.page_break_before is not None:
+        fmt.page_break_before = rule.page_break_before
+    if rule.keep_with_next is not None:
+        fmt.keep_with_next = rule.keep_with_next
+    if rule.keep_together is not None:
+        fmt.keep_together = rule.keep_together
 
     if rule.font:
         style.font.name = rule.font
@@ -111,6 +118,11 @@ def apply_rule_to_word_style(style, rule: ParagraphStyleRule) -> None:
         style.font.bold = rule.bold
     if rule.italic is not None:
         style.font.italic = rule.italic
+    style.quick_style = True
+    style.hidden = False
+    style.unhide_when_used = True
+    if style.priority is None:
+        style.priority = 10
 
 
 def set_style_east_asia_font(style, font_name: str) -> None:

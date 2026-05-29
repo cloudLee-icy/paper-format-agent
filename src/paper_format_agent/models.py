@@ -14,6 +14,7 @@ class ParagraphRole(str, Enum):
     HEADING_1 = "heading_1"
     HEADING_2 = "heading_2"
     HEADING_3 = "heading_3"
+    TOC_ENTRY = "toc_entry"
     FIGURE_CAPTION = "figure_caption"
     TABLE_CAPTION = "table_caption"
     REFERENCES_HEADING = "references_heading"
@@ -37,6 +38,9 @@ class ParagraphStyleRule:
     line_spacing_pt: float | None = None
     space_before_pt: float | None = None
     space_after_pt: float | None = None
+    page_break_before: bool | None = None
+    keep_with_next: bool | None = None
+    keep_together: bool | None = None
 
 
 @dataclass
