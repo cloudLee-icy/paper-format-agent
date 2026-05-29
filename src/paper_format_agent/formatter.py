@@ -18,18 +18,18 @@ ALIGNMENTS = {
 }
 
 DEFAULT_WORD_STYLE_NAMES = {
-    ParagraphRole.TITLE: "PFA Title",
-    ParagraphRole.ABSTRACT_HEADING: "PFA Abstract Heading",
-    ParagraphRole.ABSTRACT: "PFA Abstract",
-    ParagraphRole.KEYWORDS: "PFA Keywords",
-    ParagraphRole.HEADING_1: "PFA Heading 1",
-    ParagraphRole.HEADING_2: "PFA Heading 2",
-    ParagraphRole.HEADING_3: "PFA Heading 3",
-    ParagraphRole.FIGURE_CAPTION: "PFA Figure Caption",
-    ParagraphRole.TABLE_CAPTION: "PFA Table Caption",
-    ParagraphRole.REFERENCES_HEADING: "PFA References Heading",
-    ParagraphRole.REFERENCE: "PFA Reference",
-    ParagraphRole.BODY: "PFA Body",
+    ParagraphRole.TITLE: "论文题目",
+    ParagraphRole.ABSTRACT_HEADING: "摘要标题",
+    ParagraphRole.ABSTRACT: "摘要正文",
+    ParagraphRole.KEYWORDS: "关键词",
+    ParagraphRole.HEADING_1: "一级标题",
+    ParagraphRole.HEADING_2: "二级标题",
+    ParagraphRole.HEADING_3: "三级标题",
+    ParagraphRole.FIGURE_CAPTION: "图题",
+    ParagraphRole.TABLE_CAPTION: "表题",
+    ParagraphRole.REFERENCES_HEADING: "参考文献标题",
+    ParagraphRole.REFERENCE: "参考文献条目",
+    ParagraphRole.BODY: "正文",
 }
 
 
@@ -70,7 +70,7 @@ def ensure_template_styles(
     for role, rule in rules.styles.items():
         if role == ParagraphRole.EMPTY:
             continue
-        style_name = rule.word_style_name or DEFAULT_WORD_STYLE_NAMES.get(role, f"PFA {role.value}")
+        style_name = rule.word_style_name or DEFAULT_WORD_STYLE_NAMES.get(role, role.value)
         style = get_or_create_paragraph_style(document, style_name)
         apply_rule_to_word_style(style, rule)
         style_names[role] = style_name

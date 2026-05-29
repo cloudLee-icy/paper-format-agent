@@ -2,6 +2,12 @@
 
 ## 2026-05-28
 
+### Content-Matched Word Style Names
+
+- Renamed default generated Word styles from internal `PFA ...` labels to content-matched Chinese names such as `正文`, `一级标题`, and `参考文献条目`.
+- Kept `word_style_name` as the template-level override for journals, schools, Overleaf-derived templates, or Markdown-derived templates that need custom names.
+- Updated README wording so users know they can inspect and edit generated styles by content role.
+
 ### Style-Based Formatting Engine
 
 - Changed the formatter from direct run formatting to a style-based workflow.

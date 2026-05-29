@@ -187,8 +187,8 @@ Most academic formatting workflows still depend on manual Word editing or opaque
 - AI may help identify structure, but it should not directly write the final DOCX.
 - 确定性代码先在 Word 中创建或更新命名样式，再把段落应用到对应样式。
 - Deterministic code creates or updates named Word styles, then applies those styles to matching paragraphs.
-- 输出文档保留人工修改余地：用户可以在 Word 的样式面板里修改 `PFA Body`、`PFA Heading 1` 等样式。
-- The output remains editable: users can adjust styles such as `PFA Body` and `PFA Heading 1` in Word after generation.
+- 输出文档保留人工修改余地：用户可以在 Word 的样式面板里修改 `正文`、`一级标题`、`参考文献条目` 等样式。
+- The output remains editable: users can adjust content-matched styles such as `正文`, `一级标题`, and `参考文献条目` in Word after generation.
 - 报告记录识别结果和基础告警。
 - Reports make detected structure and warnings visible.
 

@@ -15,6 +15,7 @@ Implemented:
 - JSON template loading.
 - DOCX formatting engine.
 - Style-based formatting engine that creates named Word paragraph styles before applying them.
+- Default generated Word style names are content-matched Chinese names such as `正文`, `一级标题`, and `参考文献条目`; templates can override names with `word_style_name`.
 - Markdown report generation.
 - Basic thesis and journal templates.
 - Built-in UESTC graduate thesis template curated from a provided specification DOCX.
