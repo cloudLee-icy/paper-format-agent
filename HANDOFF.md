@@ -14,6 +14,7 @@ Implemented:
 - Rule-based paragraph role detection.
 - JSON template loading.
 - DOCX formatting engine.
+- Style-based formatting engine that creates named Word paragraph styles before applying them.
 - Markdown report generation.
 - Basic thesis and journal templates.
 - Built-in UESTC graduate thesis template curated from a provided specification DOCX.

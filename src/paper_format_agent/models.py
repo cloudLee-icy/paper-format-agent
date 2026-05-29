@@ -24,6 +24,7 @@ class ParagraphRole(str, Enum):
 
 @dataclass
 class ParagraphStyleRule:
+    word_style_name: str | None = None
     font: str | None = None
     east_asia_font: str | None = None
     size_pt: float | None = None

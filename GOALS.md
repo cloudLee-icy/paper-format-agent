@@ -40,5 +40,4 @@ The current MVP focuses on:
 
 ## Design Principle
 
-AI identifies structure. Deterministic code applies formatting.
-
+AI identifies structure. Deterministic code creates Word styles and applies formatting through those styles where possible.

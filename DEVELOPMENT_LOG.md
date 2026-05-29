@@ -2,6 +2,14 @@
 
 ## 2026-05-28
 
+### Style-Based Formatting Engine
+
+- Changed the formatter from direct run formatting to a style-based workflow.
+- JSON rules now create or update named Word paragraph styles such as `PFA Body`, `PFA Heading 1`, and `PFA Reference`.
+- Paragraphs are assigned to generated styles, leaving room for manual style edits in Word after formatting.
+- Added optional `word_style_name` to template rules for future template-specific style naming.
+- Preserved inline run formatting instead of clearing author emphasis.
+
 ### Built-In UESTC Graduate Template
 
 - Added `templates/uestc_graduate_thesis.json` as a curated built-in template based on the provided UESTC graduate thesis writing specification for Chinese students.
