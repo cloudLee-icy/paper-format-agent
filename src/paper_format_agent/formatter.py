@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from docx.document import Document as DocumentObject
 from docx.enum.style import WD_STYLE_TYPE
+from docx.enum.table import WD_ROW_HEIGHT_RULE, WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
-from .models import FormatStats, ParagraphInfo, ParagraphRole, ParagraphStyleRule, TemplateRules
+from .models import FormatStats, ParagraphInfo, ParagraphRole, ParagraphStyleRule, TableRule, TemplateRules
 
 
 ALIGNMENTS = {
@@ -49,6 +50,7 @@ def apply_template(document: DocumentObject, structure: list[ParagraphInfo], rul
         stats.styled_paragraphs += 1
 
     add_basic_warnings(stats)
+    stats.formatted_tables = apply_table_rules(document, rules)
     return stats
 
 
@@ -138,6 +140,86 @@ def apply_paragraph_style(paragraph, style_name: str | None) -> None:
     if style_name is None:
         return
     paragraph.style = style_name
+
+
+def apply_table_rules(document: DocumentObject, rules: TemplateRules) -> int:
+    if rules.table is None:
+        return 0
+
+    table_style = get_or_create_paragraph_style(document, "表内文字")
+    apply_table_text_rule_to_style(table_style, rules.table)
+
+    for table in document.tables:
+        table.alignment = WD_TABLE_ALIGNMENT.CENTER
+        table.autofit = True
+        apply_three_line_borders(table, rules.table)
+        for row in table.rows:
+            if rules.table.row_height_cm is not None:
+                row.height = Cm(rules.table.row_height_cm)
+                row.height_rule = WD_ROW_HEIGHT_RULE.AT_LEAST
+            for cell in row.cells:
+                cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+                for paragraph in cell.paragraphs:
+                    paragraph.style = table_style
+    return len(document.tables)
+
+
+def apply_table_text_rule_to_style(style, rule: TableRule) -> None:
+    fmt = style.paragraph_format
+    if rule.alignment:
+        fmt.alignment = ALIGNMENTS.get(rule.alignment)
+    if rule.line_spacing is not None:
+        fmt.line_spacing = rule.line_spacing
+    if rule.font:
+        style.font.name = rule.font
+    if rule.east_asia_font:
+        set_style_east_asia_font(style, rule.east_asia_font)
+    if rule.size_pt is not None:
+        style.font.size = Pt(rule.size_pt)
+    style.quick_style = True
+    style.hidden = False
+    style.unhide_when_used = True
+    if style.priority is None:
+        style.priority = 10
+
+
+def apply_three_line_borders(table, rule: TableRule) -> None:
+    if not table.rows:
+        return
+    clear_all_table_cell_borders(table)
+    set_row_border(table.rows[0], "top", rule.top_border_pt or 1.5)
+    set_row_border(table.rows[0], "bottom", rule.header_bottom_border_pt or 0.75)
+    set_row_border(table.rows[-1], "bottom", rule.bottom_border_pt or 1.5)
+
+
+def clear_all_table_cell_borders(table) -> None:
+    for row in table.rows:
+        for cell in row.cells:
+            tc_pr = cell._tc.get_or_add_tcPr()
+            tc_borders = get_or_add_child(tc_pr, "w:tcBorders")
+            for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
+                border = get_or_add_child(tc_borders, f"w:{edge}")
+                border.set(qn("w:val"), "nil")
+                border.set(qn("w:sz"), "0")
+
+
+def set_row_border(row, edge: str, width_pt: float) -> None:
+    for cell in row.cells:
+        tc_pr = cell._tc.get_or_add_tcPr()
+        tc_borders = get_or_add_child(tc_pr, "w:tcBorders")
+        border = get_or_add_child(tc_borders, f"w:{edge}")
+        border.set(qn("w:val"), "single")
+        border.set(qn("w:sz"), str(int(width_pt * 8)))
+        border.set(qn("w:space"), "0")
+        border.set(qn("w:color"), "000000")
+
+
+def get_or_add_child(parent, tag: str):
+    child = parent.find(qn(tag))
+    if child is None:
+        child = OxmlElement(tag)
+        parent.append(child)
+    return child
 
 
 def add_basic_warnings(stats: FormatStats) -> None:

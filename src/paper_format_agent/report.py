@@ -22,6 +22,7 @@ def write_markdown_report(
         f"- Template: `{template.name}`",
         f"- Paragraphs scanned: `{stats.total_paragraphs}`",
         f"- Paragraphs styled: `{stats.styled_paragraphs}`",
+        f"- Tables formatted: `{stats.formatted_tables}`",
         "",
         "## Detected Structure",
         "",
@@ -44,4 +45,3 @@ def write_markdown_report(
         lines.append(f"- `{info.index}` `{info.role.value}` {preview}")
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-

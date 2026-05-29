@@ -141,6 +141,7 @@ Current report summary:
 ```text
 Paragraphs scanned: 12
 Paragraphs styled: 12
+Tables formatted: 0
 
 Detected Structure:
 - abstract: 1
@@ -164,6 +165,10 @@ The fuller thesis demo covers cover metadata, statements, Chinese and English ab
 当前仍未实现完整 Word 分节体系，例如不同部分的页眉、罗马数字页码和阿拉伯数字页码切换。`page_break_before` 只是分页控制，不等同于 section break。
 
 Full Word section handling is still not implemented, including different headers and Roman/Arabic page-numbering zones. `page_break_before` controls page breaks only; it is not the same as section breaks.
+
+当前三线表支持仍是基础版：会处理普通表格边框和表内文字，不处理复杂跨页续表、重复表头、表格单位行和表注。
+
+Current three-line table support is basic: it handles ordinary table borders and in-table text, but does not yet handle complex continued tables, repeated headers, unit rows, or table notes.
 
 ## 模板示例 / Template Example
 
@@ -223,6 +228,8 @@ Most academic formatting workflows still depend on manual Word editing or opaque
 - Generated styles are marked as Word quick styles so they are easier to find and adjust in Word.
 - 模板可以设置 `page_break_before`，当前电子科大模板会让摘要标题、一级标题、参考文献标题等关键部分从新页开始。
 - Templates can set `page_break_before`; the current UESTC template starts key sections such as abstracts, level-1 headings, and references on new pages.
+- 模板可以设置基础三线表规则；当前电子科大模板会处理 Word 表格的顶线、表头下线、底线和表内文字样式。
+- Templates can set basic three-line table rules; the current UESTC template formats table top borders, header bottom borders, bottom borders, and in-table text style.
 - 报告记录识别结果和基础告警。
 - Reports make detected structure and warnings visible.
 

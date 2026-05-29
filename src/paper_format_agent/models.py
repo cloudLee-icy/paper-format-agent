@@ -52,10 +52,27 @@ class PageRule:
 
 
 @dataclass
+class TableRule:
+    style: str | None = None
+    font: str | None = None
+    east_asia_font: str | None = None
+    size_pt: float | None = None
+    line_spacing: float | None = None
+    alignment: str | None = None
+    top_border_pt: float | None = None
+    header_bottom_border_pt: float | None = None
+    bottom_border_pt: float | None = None
+    inside_border_pt: float | None = None
+    row_height_cm: float | None = None
+    keep_rows_together: bool | None = None
+
+
+@dataclass
 class TemplateRules:
     name: str = "Untitled template"
     page: PageRule = field(default_factory=PageRule)
     styles: dict[ParagraphRole, ParagraphStyleRule] = field(default_factory=dict)
+    table: TableRule | None = None
 
     @classmethod
     def from_json(cls, path: Path) -> "TemplateRules":
@@ -65,7 +82,8 @@ class TemplateRules:
             ParagraphRole(key): ParagraphStyleRule(**value)
             for key, value in data.get("styles", {}).items()
         }
-        return cls(name=data.get("name", "Untitled template"), page=page, styles=styles)
+        table = TableRule(**data["table"]) if data.get("table") else None
+        return cls(name=data.get("name", "Untitled template"), page=page, styles=styles, table=table)
 
 
 @dataclass
@@ -80,5 +98,6 @@ class ParagraphInfo:
 class FormatStats:
     total_paragraphs: int = 0
     styled_paragraphs: int = 0
+    formatted_tables: int = 0
     role_counts: dict[ParagraphRole, int] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)

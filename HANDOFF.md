@@ -18,6 +18,7 @@ Implemented:
 - Default generated Word style names are content-matched Chinese names such as `正文`, `一级标题`, and `参考文献条目`; templates can override names with `word_style_name`.
 - Generated styles are marked as Word quick styles so they are visible in the style UI.
 - Templates support `page_break_before`, `keep_with_next`, and `keep_together`; the UESTC template uses page breaks before key headings.
+- Templates support a basic `table` rule section; the UESTC template applies three-line table borders and a generated `表内文字` quick style.
 - Markdown report generation.
 - Basic thesis and journal templates.
 - Built-in UESTC graduate thesis template curated from a provided specification DOCX.
@@ -69,10 +70,13 @@ Verified output:
 - `examples/output/full_thesis_uestc_formatted.docx`
 - `examples/output/full_thesis_uestc_report.md`
 - Microsoft Word reports the full demo output as 19 pages after page-break rules.
+- `examples/output/full_thesis_uestc_report.md` reports `Tables formatted: 1`.
 
 Note: `pytest` is listed as a dev dependency but is not installed in the current runtime, so `python -m pytest -q` fails with `No module named pytest`. LibreOffice render QA currently fails because local LibreOffice reports a damaged `D:\Software\LibreOffice\program\bootstrap.ini`.
 
 Remaining layout gap: full Word section handling is not implemented yet, including different headers and Roman/Arabic page-numbering zones.
+
+Remaining table gap: three-line table support handles ordinary borders and table cell text only; continued tables, repeated headers, unit rows, and table notes are not implemented yet.
 
 ## Next Recommended Task
 

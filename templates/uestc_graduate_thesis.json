@@ -7,7 +7,7 @@
     "notes": [
       "Built from the provided UESTC graduate thesis writing specification DOCX.",
       "This is a curated built-in JSON template, not a generic automatic extraction result.",
-      "Current engine supports page margins and paragraph style rules; cover pages, headers, footers, exact table borders, and page-numbering rules are not fully represented yet."
+      "Current engine supports page margins, paragraph style rules, and basic three-line table formatting; cover pages, headers, footers, and page-numbering rules are not fully represented yet."
     ]
   },
   "page": {
@@ -15,6 +15,19 @@
     "margin_bottom_cm": 3.0,
     "margin_left_cm": 3.0,
     "margin_right_cm": 3.0
+  },
+  "table": {
+    "style": "three_line",
+    "font": "Times New Roman",
+    "east_asia_font": "SimSun",
+    "size_pt": 10.5,
+    "line_spacing": 1.0,
+    "alignment": "center",
+    "top_border_pt": 1.5,
+    "header_bottom_border_pt": 0.75,
+    "bottom_border_pt": 1.5,
+    "inside_border_pt": 0.75,
+    "row_height_cm": 0.6
   },
   "styles": {
     "title": {

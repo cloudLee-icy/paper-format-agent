@@ -2,6 +2,15 @@
 
 ## 2026-05-29
 
+### Basic Three-Line Table Formatting
+
+- Added a `table` template rule section for basic Word table formatting.
+- Implemented UESTC-style three-line tables: 1.5 pt top border, 0.75 pt header bottom border, 1.5 pt bottom border, and no vertical or ordinary inner borders.
+- Added a generated `表内文字` Word quick style for table cell paragraphs.
+- Updated format reports with `Tables formatted`.
+- Verified the full thesis demo output contains one formatted table with expected border XML values.
+- Complex continued tables, repeated headers, unit rows, and table notes remain future work.
+
 ### Quick Styles And Page Breaks
 
 - Marked generated Word styles as quick styles, visible and easier to locate in Word's style UI.
