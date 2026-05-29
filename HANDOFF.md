@@ -21,6 +21,7 @@ Implemented:
 - Built-in UESTC graduate thesis template curated from a provided specification DOCX.
 - Fixed-point line spacing support through `line_spacing_pt`.
 - Example document generator.
+- Full thesis-structure demo generator and sample document.
 - One basic structure detection test file.
 - Chinese/English bilingual README with current CLI effect and report summary.
 - README maintenance prompt in `AGENTS.md` for future user-visible behavior changes.
@@ -40,6 +41,8 @@ Implemented:
 - `templates/journal_basic.json`: journal template.
 - `templates/uestc_graduate_thesis.json`: UESTC graduate thesis template curated from the provided specification DOCX.
 - `examples/create_example_docx.py`: sample document generator.
+- `examples/create_full_thesis_docx.py`: full thesis-structure demo generator.
+- `examples/full_thesis_demo.docx`: generated full thesis-structure demo.
 
 ## Last Verified Command
 
@@ -47,9 +50,11 @@ Implemented:
 $env:PYTHONPATH='src'
 & 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m compileall -q src tests examples
 & 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' examples\create_example_docx.py
+& 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' examples\create_full_thesis_docx.py
 & 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m paper_format_agent.cli inspect --input examples\messy_paper.docx
 & 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m paper_format_agent.cli format --input examples\messy_paper.docx --template templates\thesis_basic.json --output examples\output\formatted.docx --report examples\output\report.md
 & 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m paper_format_agent.cli format --input examples\messy_paper.docx --template templates\uestc_graduate_thesis.json --output examples\output\uestc_formatted.docx --report examples\output\uestc_report.md
+& 'C:\Users\asus\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m paper_format_agent.cli format --input examples\full_thesis_demo.docx --template templates\uestc_graduate_thesis.json --output examples\output\full_thesis_uestc_formatted.docx --report examples\output\full_thesis_uestc_report.md
 ```
 
 Verified output:
@@ -59,8 +64,11 @@ Verified output:
 - `examples/output/report.md`
 - `examples/output/uestc_formatted.docx`
 - `examples/output/uestc_report.md`
+- `examples/output/full_thesis_uestc_formatted.docx`
+- `examples/output/full_thesis_uestc_report.md`
+- Microsoft Word can export the full demo output as a 6-page PDF.
 
-Note: `pytest` is listed as a dev dependency but is not installed in the current runtime, so `python -m pytest -q` fails with `No module named pytest`.
+Note: `pytest` is listed as a dev dependency but is not installed in the current runtime, so `python -m pytest -q` fails with `No module named pytest`. LibreOffice render QA currently fails because local LibreOffice reports a damaged `D:\Software\LibreOffice\program\bootstrap.ini`.
 
 ## Next Recommended Task
 

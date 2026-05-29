@@ -28,6 +28,8 @@ def detect_structure(document: DocumentObject) -> list[ParagraphInfo]:
             first_content_seen = True
         if role == ParagraphRole.REFERENCES_HEADING:
             in_references = True
+        elif role in {ParagraphRole.HEADING_1, ParagraphRole.HEADING_2, ParagraphRole.HEADING_3}:
+            in_references = False
         paragraphs.append(ParagraphInfo(index=index, text=text, style_name=style_name, role=role))
 
     return paragraphs

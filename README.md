@@ -51,6 +51,14 @@ Create the example manuscript:
 python examples/create_example_docx.py
 ```
 
+生成覆盖毕业论文常见组成部分的完整结构示例：
+
+Create a fuller thesis-structure demo:
+
+```bash
+python examples/create_full_thesis_docx.py
+```
+
 检查文档结构：
 
 Inspect detected paragraph roles:
@@ -83,6 +91,18 @@ paperfmt format \
   --report examples/output/uestc_report.md
 ```
 
+格式化完整结构示例：
+
+Format the fuller thesis-structure demo:
+
+```bash
+paperfmt format \
+  --input examples/full_thesis_demo.docx \
+  --template templates/uestc_graduate_thesis.json \
+  --output examples/output/full_thesis_uestc_formatted.docx \
+  --report examples/output/full_thesis_uestc_report.md
+```
+
 ## 当前效果 / Current Effect
 
 示例文档的 `inspect` 输出可以识别标题、摘要、关键词、章节标题、正文、图题和参考文献：
@@ -111,6 +131,8 @@ The formatting command generates:
 
 - `examples/output/formatted.docx`
 - `examples/output/report.md`
+- `examples/output/full_thesis_uestc_formatted.docx`
+- `examples/output/full_thesis_uestc_report.md`
 
 当前报告摘要：
 
@@ -134,6 +156,10 @@ Detected Structure:
 Warnings:
 - No basic structural warnings.
 ```
+
+完整结构示例当前可以覆盖封面信息、声明、摘要、英文摘要、目录、图目录、表目录、主要符号表、缩略词表、正文、图题、表题、公式文本、结论、致谢、参考文献、附录和攻读学位期间成果。使用 Word 导出的检查结果为 6 页；LibreOffice 渲染当前不可用，因为本机 `D:\Software\LibreOffice\program\bootstrap.ini` 已损坏。
+
+The fuller thesis demo covers cover metadata, statements, Chinese and English abstracts, contents, figure/table lists, symbols, acronyms, chapters, captions, formula text, conclusion, acknowledgements, references, appendix, and achievements. Microsoft Word exported the formatted demo as a 6-page PDF. LibreOffice rendering is currently unavailable because the local `D:\Software\LibreOffice\program\bootstrap.ini` is damaged.
 
 ## 模板示例 / Template Example
 

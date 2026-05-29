@@ -1,5 +1,17 @@
 # Development Log
 
+## 2026-05-29
+
+### Full Thesis Demo And Structure Check
+
+- Added `examples/create_full_thesis_docx.py` to generate an original full-structure thesis demo.
+- Generated `examples/full_thesis_demo.docx` covering cover metadata, statements, abstracts, contents, figure/table lists, symbols, acronyms, chapters, captions, formula text, conclusion, acknowledgements, references, appendix, and achievements.
+- Improved detection for unnumbered thesis headings such as contents, declarations, acknowledgements, appendices, and achievements.
+- Fixed reference-section state handling so a table-of-contents `参考文献` line does not cause following body paragraphs to be classified as references.
+- Formatted the full demo with `templates/uestc_graduate_thesis.json`; the report detected 87 paragraphs and styled 73 non-empty paragraphs.
+- Verified generated Word styles by reading the output DOCX: `正文` 24, `一级标题` 22, `二级标题` 10, `参考文献条目` 4, plus abstract, keyword, caption, and title styles.
+- Microsoft Word exported the formatted full demo to a 6-page PDF. LibreOffice render QA could not complete because local LibreOffice reports a damaged `D:\Software\LibreOffice\program\bootstrap.ini`.
+
 ## 2026-05-28
 
 ### Content-Matched Word Style Names

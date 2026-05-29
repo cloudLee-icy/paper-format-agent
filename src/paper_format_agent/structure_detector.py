@@ -8,6 +8,21 @@ from .models import ParagraphRole
 ABSTRACT_PATTERNS = ("摘要", "abstract")
 KEYWORD_PATTERNS = ("关键词", "关键字", "key words", "keywords")
 REFERENCE_PATTERNS = ("参考文献", "references", "bibliography")
+UNNUMBERED_HEADING_PATTERNS = (
+    "目录",
+    "contents",
+    "图目录",
+    "表目录",
+    "主要符号表",
+    "缩略词表",
+    "独创性声明",
+    "论文使用授权",
+    "绪论",
+    "结论",
+    "致谢",
+    "acknowledgements",
+    "acknowledgments",
+)
 
 
 def detect_role(text: str, style_name: str | None = None, in_references: bool = False) -> ParagraphRole:
@@ -33,7 +48,13 @@ def detect_role(text: str, style_name: str | None = None, in_references: bool = 
         return ParagraphRole.HEADING_3
     if "heading 2" in style_lower or re.match(r"^\d+\.\d+\s+", stripped):
         return ParagraphRole.HEADING_2
-    if "heading 1" in style_lower or re.match(r"^(第[一二三四五六七八九十\d]+章|\d+)\s+", stripped):
+    if (
+        "heading 1" in style_lower
+        or lower in UNNUMBERED_HEADING_PATTERNS
+        or re.match(r"^(第[一二三四五六七八九十\d]+章|\d+)\s+", stripped)
+        or re.match(r"^附录\s*[a-zA-Z一二三四五六七八九十\d]*", stripped)
+        or stripped.startswith("攻读学位期间")
+    ):
         return ParagraphRole.HEADING_1
     if in_references or re.match(r"^\s*(\[\d+\]|\d+[\.\)]|[A-Z][a-z]+,\s)", stripped):
         return ParagraphRole.REFERENCE
